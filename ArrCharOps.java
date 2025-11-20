@@ -119,7 +119,7 @@ public class ArrCharOps {
     {
         char[] result = new char[arr.length];
         int count = 0;
-        for (int i = beginIndex; i < endIndex; i++)
+        for (int i = beginIndex; i <= endIndex; i++)
         {
             result[count] = arr[i];
             count++;
