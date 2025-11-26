@@ -180,6 +180,10 @@ public class ArrCharOps {
      */
     public static int compareTo(String str1, String str2) 
     {
+        if (str1==null || str2==null || str1.equals("") || str2.equals(""))
+        {
+            return -2;
+        }
         int l1 = str1.length();
         int l2 = str2.length();
         int limit = Math.min(l1, l2);
