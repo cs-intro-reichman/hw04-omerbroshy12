@@ -117,12 +117,15 @@ public class ArrCharOps {
      */     
     public static char[] subArray(char[] arr, int beginIndex, int endIndex) 
     {
-        char[] result = new char[arr.length];
-        int count = 0;
-        for (int i = beginIndex; i < endIndex; i++)
+        int newLength = endIndex - beginIndex;
+        char[] result = new char[newLength];
+        if (newLength < 0) 
+        { 
+             return new char[0];
+        }  
+        for (int i = beginIndex; i < endIndex; i++) 
         {
-            result[count] = arr[i];
-            count++;
+            result[i - beginIndex] = arr[i]; 
         }
         return result;
     }
@@ -136,14 +139,18 @@ public class ArrCharOps {
      */
     public static long hashCode(char[] arr) 
     {
-        int sum = 0;
-        if (arr==null)
-            return 0;
-        for (int i = 0; i < arr.length; i++)
+        if (arr == null || arr.length == 0) 
         {
-            sum += arr[i]*Math.pow(7, arr.length - (i+1));
+            return 0;
         }
-        return sum;
+        int hashValue = 0;
+        int n = arr.length;
+        
+        for (int i = 0; i < n; i++) 
+        {
+             hashValue += arr[i] * Math.pow(7, n - (i + 1));
+        }
+        return hashValue;
     }
 
     /**
@@ -173,25 +180,37 @@ public class ArrCharOps {
      */
     public static int compareTo(String str1, String str2) 
     {
-        String s1 = str1.toLowerCase();
-        String s2 = str2.toLowerCase();
-        if (s1==s2)
-            return 0;
-        if (s1.length()>s2.length())
-            return 1;
-        else if (s1.length()<s2.length())
-            return -1;
-        for (int i = 0; i < s1.length(); i++)
+        int l1 = str1.length();
+        int l2 = str2.length();
+        int limit = Math.min(l1, l2);
+
+        for (int i = 0; i < limit; i++) 
         {
-            if (s1.charAt(i)>s2.charAt(i))
+            char c1 = str1.charAt(i);
+            char c2 = str2.charAt(i);
+            if (c1 != c2) 
             {
-                return 1;
-            }
-            else if (s1.charAt(i)<s2.charAt(i))
-            {
-                return -1;
+                if (c1 < c2) 
+                {
+                    return -1;
+                } 
+                else 
+                {
+                    return 1;
+                }
             }
         }
-        return -2;
+        if (l1 < l2) 
+        {
+            return -1; 
+        } 
+        else if (l1 > l2) 
+        {
+            return 1;  
+        } 
+        else 
+        {
+            return 0;  
+        }
     }
 }
